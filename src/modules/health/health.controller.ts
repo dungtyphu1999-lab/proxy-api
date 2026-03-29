@@ -2,6 +2,8 @@ import { SuccessResponseDto } from '@/shared/dto/response.dto';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DatabaseService } from '@/database/database.service';
+import { readdirSync, existsSync } from 'fs';
+import { join } from 'path';
 
 @ApiTags('Health')
 @Controller()
@@ -28,12 +30,23 @@ export class HealthController {
       .where('schemaname', 'public')
       .orderBy('tablename');
     const migrations = await knex('knex_migrations').select('*').catch(() => []);
+
+    // Check migration files on disk
+    const migrDir = join(__dirname, '..', '..', 'database', 'migrations');
+    const migrDirExists = existsSync(migrDir);
+    const migrFiles = migrDirExists ? readdirSync(migrDir).filter(f => f.endsWith('.js')).slice(0, 5) : [];
+
     return {
       tableCount: tables.length,
       tables: tables.map((t: any) => t.tablename),
       migrationCount: migrations.length,
       migrations: migrations.slice(0, 5),
+      migrationDir: migrDir,
+      migrationDirExists: migrDirExists,
+      migrationFileSample: migrFiles,
+      migrationFileCount: migrDirExists ? readdirSync(migrDir).filter(f => f.endsWith('.js')).length : 0,
     };
   }
 }
+
 
