@@ -22,12 +22,12 @@ const baseConfig = {
     max: 10,
   },
   migrations: {
-    directory: './migrations',
+    directory: path.join(__dirname, 'migrations'),
     extension: migrationExt,
     loadExtensions: ['.' + migrationExt],
   },
   seeds: {
-    directory: './seeds',
+    directory: path.join(__dirname, 'seeds'),
     extension: migrationExt,
     loadExtensions: ['.' + migrationExt],
   },
