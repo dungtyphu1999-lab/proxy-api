@@ -39,4 +39,4 @@ RUN mkdir -p uploads/images uploads/order-items
 
 EXPOSE 3002
 
-CMD ["sh", "-c", "npx knex --knexfile dist/database/knexfile.js migrate:latest && node dist/main"]
+CMD ["sh", "-c", "node dist/migrate.js && node dist/main"]
