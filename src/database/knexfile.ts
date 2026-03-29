@@ -4,6 +4,10 @@ import * as path from 'path';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
+// Detect if running from compiled dist (JS) or source (TS)
+const isCompiled = __filename.endsWith('.js');
+const migrationExt = isCompiled ? 'js' : 'ts';
+
 const baseConfig = {
   client: process.env.DB_CLIENT || 'pg',
   connection: {
@@ -19,11 +23,13 @@ const baseConfig = {
   },
   migrations: {
     directory: './migrations',
-    extension: 'ts',
+    extension: migrationExt,
+    loadExtensions: ['.' + migrationExt],
   },
   seeds: {
     directory: './seeds',
-    extension: 'ts',
+    extension: migrationExt,
+    loadExtensions: ['.' + migrationExt],
   },
 };
 
