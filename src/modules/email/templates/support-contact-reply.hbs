@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phản hồi yêu cầu hỗ trợ - BACHHOAMMO</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px;">
+
+        <!-- Header với logo/brand -->
+        <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+            <h1 style="color: #333; margin: 0; font-size: 24px;">BACHHOAMMO</h1>
+            <p style="color: #666; margin: 5px 0 0 0; font-size: 14px;">Phản hồi từ Nhóm Hỗ trợ</p>
+        </div>
+
+        <!-- Greeting -->
+        <div style="margin-bottom: 25px;">
+            <p style="color: #333; line-height: 1.6; margin: 0; font-size: 16px;">
+                Kính gửi, {{fullName}},
+            </p>
+            <p style="color: #333; line-height: 1.6; margin: 10px 0 0 0; font-size: 16px;">
+                Cảm ơn bạn đã liên hệ với bộ phận hỗ trợ của BACHHOAMMO. Chúng tôi đã xem xét yêu cầu của bạn và rất vui được cung cấp câu trả lời bên dưới.
+            </p>
+        </div>
+
+        <!-- Original Request -->
+        <div style="margin: 25px 0;">
+            <h3 style="color: #333; margin: 0 0 15px 0; font-size: 18px;">Yêu cầu gốc của bạn</h3>
+            <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; border-left: 4px solid #6c757d;">
+                <p style="color: #495057; line-height: 1.6; margin: 0 0 10px 0;"><strong>Đã gửi:</strong> {{formatDate createdAt}}</p>
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 4px; border: 1px solid #dee2e6; margin-top: 15px;">
+                    <p style="color: #333; line-height: 1.6; margin: 0; white-space: pre-wrap;">{{originalContent}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Response -->
+        <div style="margin: 25px 0;">
+            <h3 style="color: #2e7d32; margin: 0 0 15px 0; font-size: 18px;">Phản hồi của chúng tôi</h3>
+            <div style="background-color: #e8f5e8; border-radius: 8px; padding: 20px; border-left: 4px solid #4caf50;">
+                <div style="background-color: #ffffff; padding: 20px; border-radius: 8px;">
+                    <p style="color: #333; line-height: 1.8; margin: 0; white-space: pre-wrap;">{{replyContent}}</p>
+                </div>
+                <p style="color: #2e7d32; font-size: 14px; margin: 15px 0 0 0;">
+                    <strong>Ngày phản hồi:</strong> {{formatDate repliedAt}}
+                </p>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div style="text-align: center; margin: 25px 0;">
+            <div style="background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; display: inline-block;">
+                <p style="color: #155724; margin: 0; font-size: 16px;">
+                    <strong>Trạng thái: Yêu cầu đã hoàn tất ✓</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Further assistance -->
+        <div style="margin: 25px 0;">
+            <p style="color: #333; line-height: 1.6; margin: 0; font-size: 16px;">
+                Nếu bạn cần thêm sự trợ giúp hoặc có bất kỳ câu hỏi nào khác, xin đừng ngần ngại liên hệ lại với chúng tôi. Chúng tôi luôn sẵn sàng hỗ trợ bạn.
+            </p>
+        </div>
+
+        <!-- Contact info -->
+        <div style="margin: 30px 0; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+            <h4 style="color: #333; margin: 0 0 10px 0; font-size: 16px;">Thông tin liên hệ</h4>
+            <p style="color: #666; font-size: 14px; line-height: 1.5; margin: 0;">
+                Email: support@bachhoammo.net<br>
+                Website: https://bachhoammo.net
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #666; font-size: 14px; margin: 0;">
+                Trân trọng,<br>
+                <strong>Đội ngũ Hỗ trợ BACHHOAMMO</strong>
+            </p>
+            <p style="color: #999; font-size: 12px; margin: 15px 0 0 0;">
+                Email này được gửi để phản hồi yêu cầu hỗ trợ của bạn được gửi vào ngày {{formatDate createdAt}}.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
