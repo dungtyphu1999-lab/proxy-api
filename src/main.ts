@@ -44,9 +44,11 @@ async function bootstrap() {
   const allowedOrigins = new Set(
     (appConfigService.app.corsOrigins || []).map(normalizeOrigin),
   );
+  const allowAllOrigins = allowedOrigins.has('*') || allowedOrigins.size === 0;
   app.enableCors({
     origin: (origin, cb) => {
       if (!origin) return cb(null, true);
+      if (allowAllOrigins) return cb(null, true);
       const normalized = normalizeOrigin(origin);
       if (allowedOrigins.has(normalized)) return cb(null, true);
       return cb(null, false);
