@@ -15,6 +15,9 @@ import { EmailService } from './email.service';
           host: configService.get('email.host'),
           port: configService.get('email.port'),
           secure: configService.get('email.secure'),
+          connectionTimeout: 5000,
+          greetingTimeout: 5000,
+          socketTimeout: 10000,
           auth: {
             user: configService.get('email.user'),
             pass: configService.get('email.pass'),

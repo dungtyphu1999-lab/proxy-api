@@ -123,17 +123,22 @@ export class AuthService {
         assigned_at: new Date(),
       });
 
-      // Send verification code (non-blocking - user can resend if email fails)
-      const verificationSent =
-        await this.verificationService.sendVerificationCode(signUpDto.email);
-      if (!verificationSent) {
-        this.logger.warn(
-          `Verification email failed for ${signUpDto.email}, user can resend`,
-        );
-      }
-
       return { user, user_profile };
     });
+
+    // Send verification code OUTSIDE the transaction (non-blocking)
+    this.verificationService
+      .sendVerificationCode(signUpDto.email)
+      .then((sent) => {
+        if (!sent) {
+          this.logger.warn(
+            `Verification email failed for ${signUpDto.email}, user can resend`,
+          );
+        }
+      })
+      .catch((err: unknown) => {
+        this.logger.warn(`Verification email error for ${signUpDto.email}:`, err);
+      });
 
     const res = await this.generateAuthResponse(user);
 
