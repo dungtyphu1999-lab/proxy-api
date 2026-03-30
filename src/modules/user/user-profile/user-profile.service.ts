@@ -61,13 +61,15 @@ export class UserProfileService {
       );
     }
 
-    const existingUsername =
-      await this.userProfileRepository.findByUsernameExit(
-        data.username ?? '',
-        userId,
-      );
-    if (existingUsername) {
-      throw new ConflictException('Username đã tồn tại');
+    if (data.username) {
+      const existingUsername =
+        await this.userProfileRepository.findByUsernameExit(
+          data.username,
+          userId,
+        );
+      if (existingUsername) {
+        throw new ConflictException('Username đã tồn tại');
+      }
     }
 
     return this.userProfileRepository.updateProfile2(userId, data);

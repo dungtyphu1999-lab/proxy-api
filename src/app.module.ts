@@ -38,6 +38,9 @@ import { NotificationModule } from './modules/user/notification/notification.mod
 // Admin users (dùng bởi AdminNotificationModule)
 import { AdminUserModule } from './modules/admin/users/admin-users.module';
 
+// User profile management
+import { UserProfileModule } from './modules/user/user-profile/user-profile.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -61,6 +64,7 @@ import { AdminUserModule } from './modules/admin/users/admin-users.module';
     NotificationModule,
     AdminNotificationModule,
     AdminUserModule,
+    UserProfileModule,
 
     RouterModule.register([
       {
@@ -108,6 +112,10 @@ import { AdminUserModule } from './modules/admin/users/admin-users.module';
               {
                 path: 'wallet',
                 module: WalletModule,
+              },
+              {
+                path: 'profile',
+                module: UserProfileModule,
               },
               {
                 path: 'telegram',

@@ -55,6 +55,21 @@ knex.migrate
       console.log(`[migrate] Batch ${batchNo}: ran ${log.length} migration(s)`);
       log.forEach((m) => console.log(' -', m));
     }
+    // Seed critical data (idempotent - safe to run on every deploy)
+    console.log('[migrate] Seeding roles...');
+    return knex('roles').select('id').then((roles: { id: string }[]) => {
+      if (roles.length > 0) {
+        console.log('[migrate] Roles already seeded, skipping');
+        return;
+      }
+      return knex('roles').insert([
+        { id: '00000000-0000-0000-0000-000000000001', name: 'admin' },
+        { id: '00000000-0000-0000-0000-000000000002', name: 'user' },
+        { id: '00000000-0000-0000-0000-000000000003', name: 'moderator' },
+      ]).then(() => console.log('[migrate] Roles seeded successfully'));
+    });
+  })
+  .then(() => {
     return knex.destroy();
   })
   .then(() => {

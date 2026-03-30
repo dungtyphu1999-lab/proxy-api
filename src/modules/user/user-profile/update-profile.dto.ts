@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsOptional,
   IsString,
@@ -9,20 +9,21 @@ import {
 } from 'class-validator';
 
 export class UpdateUserProfileDto {
-  @ApiProperty({ example: 'Nguyễn Văn A' })
+  @ApiPropertyOptional({ example: 'Nguyễn Văn A' })
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
-  full_name: string;
+  full_name?: string;
 
-  @ApiProperty({ example: 'nguyenvana' })
+  @ApiPropertyOptional({ example: 'nguyenvana' })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   @Matches(/^[a-z0-9_]+$/, {
     message: 'Username chỉ được chứa chữ thường, số và dấu gạch dưới (_)',
   })
   @MinLength(8)
   @MaxLength(30)
-  username: string;
+  username?: string;
 
   @ApiPropertyOptional({ example: '0909123456' })
   @IsOptional()
