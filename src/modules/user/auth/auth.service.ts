@@ -123,12 +123,12 @@ export class AuthService {
         assigned_at: new Date(),
       });
 
-      // Send verification code
+      // Send verification code (non-blocking - user can resend if email fails)
       const verificationSent =
         await this.verificationService.sendVerificationCode(signUpDto.email);
       if (!verificationSent) {
-        throw new BadRequestException(
-          ErrorCode.AUTH_CANNOT_SEND_VERIFICATION_EMAIL,
+        this.logger.warn(
+          `Verification email failed for ${signUpDto.email}, user can resend`,
         );
       }
 

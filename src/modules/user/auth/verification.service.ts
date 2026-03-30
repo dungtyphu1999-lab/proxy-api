@@ -43,8 +43,7 @@ export class VerificationService {
         this.logger.log(`Verification code sent to ${email}`);
         return true;
       } else {
-        // Clean up cache if email failed
-        await this.cacheManager.del(redisKey);
+        this.logger.warn(`Email send failed for ${email}, keeping code in cache for resend`);
         return false;
       }
     } catch (error) {
